@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const ColorPicker = () => {
+  const [color, setColor] = React.useState("#FFFFFF");
+  const [error, setError] = React.useState("");
+
+  const handleColorChange = (e) => {
+    const newColor = e.target.value;
+    if (/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(newColor)) {
+      setColor(newColor);
+      setError("");
+    } else {
+      setError("Invalid HEX color code");
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={color}
+        onChange={handleColorChange}
+        placeholder="Enter HEX color code"
+      />
+      {error && <p>{error}</p>}
+      <div
+        style={{
+          width: "100px",
+          height: "100px",
+          backgroundColor: color,
+          marginTop: "10px",
+        }}
+      ></div>
+    </div>
+  );
+};
+
+ReactDOM.render(<ColorPicker />, document.getElementById("root"));
+
+    // Your  code will go here
+  </script>
+</html>
